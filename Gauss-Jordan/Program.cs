@@ -11,7 +11,12 @@ namespace Gauss_Jordan
     {
         static void Main(string[] args)
         {
-            Application.Run(new Form1());
+            Tuple<float[,], float[]> linsystem = null;
+            if (args.Length > 0)
+            {
+                 linsystem = Utils.gaussFromFile(args[0]);
+            }
+            Application.Run(new Form1(linsystem));
         }
     }
 }

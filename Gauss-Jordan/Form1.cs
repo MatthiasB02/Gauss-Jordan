@@ -12,7 +12,7 @@ namespace Gauss_Jordan
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        public Form1(Tuple<float[,],float[]> linsystem)
         {
             InitializeComponent();
 
@@ -24,7 +24,16 @@ namespace Gauss_Jordan
             matrixView.AllowUserToDeleteRows = false;
             
             numericUpDown1.Value = 2;
-            
+            if(linsystem != null)
+            {
+                this.matrix = linsystem.Item1;
+                this.solution = linsystem.Item2;
+
+                numericUpDown1.Value = matrix.GetLength(0);
+
+                reset_Click(null, null);
+            }
+
         }
 
         float[,] matrix;
