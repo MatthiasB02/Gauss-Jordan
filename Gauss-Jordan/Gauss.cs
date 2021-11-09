@@ -23,7 +23,9 @@ namespace Gauss_Jordan
         {
             for(int col = 0; col < matrix.GetLength(1)-1; col++)
             {
-                checkMatrix(col,col);
+                if (!checkMatrix(col, col))
+                    return;
+
                 for(int row = col+1; row < matrix.GetLength(0); row++)
                 {
                     float factor1 = matrix[col, col];
@@ -49,6 +51,12 @@ namespace Gauss_Jordan
                 
                 float factor2 = matrix[col, col];
                 
+                if(factor2 == 0)
+                {
+                    Utils.displayAlert("Can't apply gauss-jordan");
+                    return;
+                }
+
                 for(int colInRow = 0;colInRow < matrix.GetLength(1); colInRow++)
                 {
                     matrix[col, colInRow] /= factor2;                    
@@ -69,7 +77,7 @@ namespace Gauss_Jordan
             }
         }
 
-        private void checkMatrix(int r,int c)
+        private bool checkMatrix(int r,int c)
         {
             if(matrix[r,c] == 0)
             {
@@ -78,12 +86,14 @@ namespace Gauss_Jordan
                     if(matrix[row,c] != 0)
                     {
                         swapRow(r, row);
-                        return;
+                        return true;
                     }
                 }
                 //Could not find a row
                 Utils.displayAlert("Can't solve this.");
+                return false;
             }
+            return true;
         }
 
         private void swapRow(int rowInd1,int rowInd2)
