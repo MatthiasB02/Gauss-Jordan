@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Gauss_Jordan
 {
     class Gauss
@@ -20,9 +21,9 @@ namespace Gauss_Jordan
 
         public void gauss()
         {
-            checkMatrix();
             for(int col = 0; col < matrix.GetLength(1)-1; col++)
             {
+                checkMatrix(col,col);
                 for(int row = col+1; row < matrix.GetLength(0); row++)
                 {
                     float factor1 = matrix[col, col];
@@ -68,18 +69,20 @@ namespace Gauss_Jordan
             }
         }
 
-        private void checkMatrix()
+        private void checkMatrix(int r,int c)
         {
-            if(matrix[0,0] == 0)
+            if(matrix[r,c] == 0)
             {
                 for(int row = 1; row < matrix.GetLength(0); row++)
                 {
-                    if(matrix[row,0] != 0)
+                    if(matrix[row,c] != 0)
                     {
-                        swapRow(0, row);
+                        swapRow(r, row);
                         return;
                     }
                 }
+                //Could not find a row
+                Utils.displayAlert("Can't solve this.");
             }
         }
 

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Windows.Forms;
+
 namespace Gauss_Jordan
 {
     class Utils
@@ -20,6 +22,11 @@ namespace Gauss_Jordan
                 Console.Write($"| {gauss.solution[row]} \n");
             }
             Console.WriteLine("---------------------------------------------");
+        }
+
+        public static void displayAlert(string message)
+        {
+            MessageBox.Show(message, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         
     }
